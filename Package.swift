@@ -16,5 +16,8 @@ let package = Package(
         .target(
             name: "Procbridge",
             dependencies: []),
+        .testTarget(
+            name: "ProcbridgeTests",
+            dependencies: ["Procbridge"]),
     ]
 )
