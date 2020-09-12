@@ -8,6 +8,11 @@ Please note that this repo is the **Swift implementation** of ProcBridge protoco
 
 Add this repository as a Swift Package dependency.
 
+# Requirements
+
+- macOS 10.14 or later
+- Xcode 11 or later
+
 # Usage
 
 Server side:
