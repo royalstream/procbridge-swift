@@ -22,7 +22,7 @@ public class PBServer {
     
     public var isStarted : Bool { return self.listener.stateUpdateHandler != nil }
     
-    public func start() {
+    public func start(in queue: DispatchQueue = .main) {
         precondition(!isStarted)
         self.listener.stateUpdateHandler = { state in
             switch state {
@@ -35,8 +35,7 @@ public class PBServer {
             }
         }
         self.listener.newConnectionHandler = { nwconn in self.sessions.append(ServerConn(nwconn, self)) }
-        self.listener.start(queue: .main)
-        dispatchMain()
+        self.listener.start(queue: queue)
     }
     
     public func stop() {

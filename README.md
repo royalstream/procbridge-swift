@@ -39,6 +39,8 @@ let server = PBServer(port : port) { (method,args) in
 }
 
 server.start()
+
+dispatchMain()
 ```
 
 Client side:
