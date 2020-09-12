@@ -6,4 +6,49 @@ Please note that this repo is the **Swift implementation** of ProcBridge protoco
 
 # Installation
 
-TODO
+Add this repository as a Swift Package dependency.
+
+# Usage
+
+Server side:
+
+```swift
+import Foundation
+import Procbridge
+
+let port:UInt16 = 8000
+
+let server = PBServer(port : port) { (method,args) in
+    switch method {
+    case "echo":
+        return args
+    case "sum":
+        let arr = args as! [Int]
+        return arr.reduce(0,+)
+    case "err":
+        print("Server error \(args)")
+        return 0
+    default:
+        return "Unknown action"
+    }
+}
+
+server.start()
+```
+
+Client side:
+
+```swift
+import Foundation
+import Procbridge
+
+let port:UInt16 = 8000
+
+let client = PBClient(host: "127.0.0.1", port: port)
+
+print(try! client.request(method: "echo", payload: 123))
+print(try! client.request(method: "echo", payload: ["a","b","c"]))
+print(try! client.request(method: "sum", payload: [1,2,3,4]))
+```
+
+
